@@ -41,6 +41,10 @@ body {
   background-color: rgb(130, 130, 130);
 }
 
+.calculator-buttons button:active {
+  background-color: rgb(191, 191, 191);
+}
+
 .operator-buttons {
   display: grid;
   gap: 1px;
@@ -50,6 +54,10 @@ body {
 
 .operator-buttons button {
   background-color: orange;
+}
+
+.operator-buttons button:active {
+  background-color: rgb(200, 130, 0);
 }
 
 #clear {
@@ -72,3 +80,9 @@ button {
   border: none;
   padding: 1px;
 }
+
+#clear:active {
+  background-color: rgb(130, 130, 130);
+}
+
+
