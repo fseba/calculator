@@ -20,7 +20,7 @@ body {
 
 .input-field {
   background-color: rgb(100, 100, 100);
-  border-radius: 8px 8px 0px 0px;
+  border-radius: 8px 8px 0 0;
   color: white;
   font-size: 2em;
   text-align: right;
@@ -58,6 +58,7 @@ body {
 
 .operator-buttons button:active {
   background-color: rgb(200, 130, 0);
+  border: 1px solid rgb(100, 100, 100);
 }
 
 #clear {
@@ -68,11 +69,12 @@ body {
 
 .button-zero {
   grid-column: 1 / 3;
-  border-radius: 0px 0px 0px 8px; 
+  border-radius: 0 0 0 8px; 
 }
 
 #operate {
-  border-radius: 0px 0px 8px 0px; 
+  border-radius: 0 0 8px 0; 
+  border: none;
 }
 
 button {
@@ -80,10 +82,11 @@ button {
   border: none;
   font-size: 1em;
   padding: 1px;
+  height: 50px;
+  width: auto;
 }
 
 #clear:active {
   background-color: rgb(130, 130, 130);
 }
-
 
