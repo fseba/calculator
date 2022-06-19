@@ -32,3 +32,18 @@ function operate(a, operator, b) {
       return divide(a, b);
   }
 }
+
+// populate input
+
+let displayValue = '';
+
+const inputField = document.querySelector('.input-field'); 
+const inputButtons = document.querySelectorAll('.input-buttons');
+
+inputButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    displayValue += button.textContent;
+    inputField.textContent = displayValue;
+  }
+);  
+});
