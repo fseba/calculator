@@ -15,6 +15,7 @@ function multiply(a, b) {
 function divide(a, b) {
   if(b === 0) {
     alert('Dividing by zero is forbidden, you mathematical wonder.');
+    // reset necessary 
     return; 
   }
   return a / b; 
@@ -26,7 +27,7 @@ function operate(a, operator, b) {
       return add(a, b);
     case '-': 
       return subtract(a, b);
-    case '*': 
+    case 'x': 
       return multiply(a, b);
     case '/': 
       return divide(a, b);
@@ -37,16 +38,21 @@ function operate(a, operator, b) {
 
 let displayValue = '';
 let operator; 
+let firstValue; 
+let secondValue;
 
 const inputField = document.querySelector('.input-field'); 
 const inputButtons = document.querySelectorAll('.input-buttons');
-const operatorButtons = document.querySelectorAll('.operator-buttons button');
+const operatorButtons = document.querySelectorAll('.grid-operator-buttons button');
+const equalButton = document.getElementById('equal'); 
+
+function populate(input) {
+  displayValue += input;
+  inputField.textContent = displayValue;
+}
 
 inputButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    displayValue += button.textContent;
-    inputField.textContent = displayValue;
-   }); 
+  button.addEventListener('click', () => populate(button.textContent)); 
 });
 
 operatorButtons.forEach(button => {
@@ -61,5 +67,12 @@ operatorButtons.forEach(button => {
     
     operator = button.textContent;
     button.classList.toggle('operator-buttons-clicked'); 
-  })
+    })
+  });
+
+
+equalButton.addEventListener('click', () => {
+  firstValue = operate(parseFloat(firstValue), operator, parseFloat(displayValue)); 
+  inputField.textContent = firstValue;
+
 });
