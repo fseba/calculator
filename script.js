@@ -54,7 +54,7 @@ const inputButtons = document.querySelectorAll('.input-buttons');
 const operatorButtons = document.querySelectorAll('.grid-operator-buttons button');
 const equalButton = document.getElementById('equal'); 
 const clearButton = document.getElementById('clear'); 
-
+const backspaceButton = document.getElementById('backspace'); 
 
 //functions
 
@@ -84,6 +84,11 @@ function clear() {
       button.classList.toggle('operator-buttons-clicked');
     };
   });
+}
+
+function backspace() {
+  displayValue = inputField.textContent.slice(0,inputField.textContent.length-1)
+  inputField.textContent = displayValue; 
 }
 
 
@@ -157,3 +162,6 @@ equalButton.addEventListener('click', () => {
 
 
 clearButton.addEventListener('click', () => clear());
+
+
+backspaceButton.addEventListener('click', () => backspace());
