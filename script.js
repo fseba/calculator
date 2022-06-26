@@ -21,17 +21,23 @@ function divide(a, b) {
   return a / b; 
 }
 
-function operate(a, operator, b) {
-  switch(operator) {
+function operate(a, operation, b) {
+  const aInt = parseInt(a); 
+  const bInt = parseInt(b); 
+  switch(operation) {
     case '+': 
-      return add(a, b);
+      operator = ''; 
+      return add(aInt, bInt);
     case '-': 
-      return subtract(a, b);
+      operator = ''; 
+      return subtract(aInt, bInt);
     case 'x': 
-      return multiply(a, b);
+      operator = ''; 
+      return multiply(aInt, bInt);
     case '/': 
-      return divide(a, b);
-  }
+      operator = ''; 
+      return divide(aInt, bInt);
+    } 
 }
 
 // populate input
@@ -40,6 +46,8 @@ let displayValue = '';
 let operator; 
 let firstValue; 
 let secondValue;
+let firstValueSet = false;
+let secondValueSet = false; 
 
 const inputField = document.querySelector('.input-field'); 
 const inputButtons = document.querySelectorAll('.input-buttons');
@@ -51,28 +59,64 @@ function populate(input) {
   inputField.textContent = displayValue;
 }
 
+function setValue(input) {
+  if (!firstValueSet) {
+    firstValue = input; 
+    firstValueSet = true; 
+  } else {
+    secondValue = input;
+    secondValueSet = true; 
+  };
+  displayValue = '';
+}
+
 inputButtons.forEach(button => {
-  button.addEventListener('click', () => populate(button.textContent)); 
+  button.addEventListener('click', () => {
+    populate(button.textContent)
+  }); 
 });
 
 operatorButtons.forEach(button => {
   button.addEventListener('click', () => {
     operatorButtons.forEach(button => {
-      if(button.classList.contains('operator-buttons-clicked')) { // to remove the clicked class if other operator button is clicked
+      if(button.classList.contains('operator-buttons-clicked')) { // to remove the 'operator-buttons-clicked' class if other operator button is clicked
         button.classList.toggle('operator-buttons-clicked');
       };
     });
 
-    if(button.textContent === '=') return; // to prevent the operator being set to '='
+    if(button.textContent === '=') return; // to prevent the operator being set to '=', but remove 'operator-buttons-clicked' class when equal button is pressed
     
+    if(firstValueSet && operator === '') {
+      operator = button.textContent;
+      button.classList.toggle('operator-buttons-clicked');
+      displayValue = ''; 
+      return; 
+    }
+
+    if(firstValueSet && operator !== '') {
+      setValue(displayValue);
+      firstValue = operate(firstValue, operator, secondValue); 
+      populate(firstValue);
+      secondValueSet = false; 
+      displayValue = '';
+    } else {
+      setValue(displayValue);
+    };
     operator = button.textContent;
     button.classList.toggle('operator-buttons-clicked'); 
+
+
     })
   });
 
 
 equalButton.addEventListener('click', () => {
-  firstValue = operate(parseFloat(firstValue), operator, parseFloat(displayValue)); 
-  inputField.textContent = firstValue;
-
+  setValue(displayValue); 
+  firstValue = operate(firstValue, operator, secondValue); 
+  firstValueSet = true;
+  secondValueSet = false; 
+  populate(firstValue);
+  //displayValue = ''; //keine Lösung führt zu NaN - evtl über dritte Variable 'solution' möglich
+ //displayValue wird nicht immer korrekt zurück gesetzt, bzw. nicht immer wenn nötig
+ //wenn operator nach equal ausgeführt wird z.B.
 });
