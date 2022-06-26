@@ -44,6 +44,7 @@ function operate(a, operation, b) {
 
 let displayValue = '';
 let operator; 
+let lastOperator; 
 let firstValue; 
 let secondValue;
 let firstValueSet = false;
@@ -87,7 +88,7 @@ operatorButtons.forEach(button => {
     if(button.textContent === '=') return; // to prevent the operator being set to '=', but remove 'operator-buttons-clicked' class when equal button is pressed
     
     if(firstValueSet && operator === '') {
-      operator = button.textContent;
+      lastOperator = operator = button.textContent;
       button.classList.toggle('operator-buttons-clicked');
       displayValue = ''; 
       return; 
@@ -102,7 +103,7 @@ operatorButtons.forEach(button => {
     } else {
       setValue(displayValue);
     };
-    operator = button.textContent;
+    lastOperator = operator = button.textContent;
     button.classList.toggle('operator-buttons-clicked'); 
 
 
@@ -111,12 +112,15 @@ operatorButtons.forEach(button => {
 
 
 equalButton.addEventListener('click', () => {
-  setValue(displayValue); 
+
+  if(operator === '') { //makes it possible to press the equal key several times to repeat the calculation
+    operator = lastOperator; 
+    displayValue = '';
+  } else {
+    setValue(displayValue); 
+  };
   firstValue = operate(firstValue, operator, secondValue); 
   firstValueSet = true;
   secondValueSet = false; 
   populate(firstValue);
-  //displayValue = ''; //keine Lösung führt zu NaN - evtl über dritte Variable 'solution' möglich
- //displayValue wird nicht immer korrekt zurück gesetzt, bzw. nicht immer wenn nötig
- //wenn operator nach equal ausgeführt wird z.B.
 });
