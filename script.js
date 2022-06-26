@@ -112,6 +112,7 @@ operatorButtons.forEach(button => {
 
 
 equalButton.addEventListener('click', () => {
+  if(firstValue === undefined) return; //error handling for when the equal key is pressed without values being set
 
   if(operator === '') { //makes it possible to press the equal key several times to repeat the calculation
     operator = lastOperator; 
@@ -119,8 +120,16 @@ equalButton.addEventListener('click', () => {
   } else {
     setValue(displayValue); 
   };
+
   firstValue = operate(firstValue, operator, secondValue); 
-  firstValueSet = true;
   secondValueSet = false; 
-  populate(firstValue);
+
+  if(isNaN(firstValue)) { //error handling for when the equal key is pressed without values being set
+    populate('Error');
+    firstValueSet = false; 
+  } else {
+     populate(firstValue);
+  }
+
+  displayValue = '';
 });
