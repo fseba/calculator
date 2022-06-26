@@ -53,7 +53,10 @@ const inputField = document.querySelector('.input-field');
 const inputButtons = document.querySelectorAll('.input-buttons');
 const operatorButtons = document.querySelectorAll('.grid-operator-buttons button');
 const equalButton = document.getElementById('equal'); 
+const clearButton = document.getElementById('clear'); 
 
+
+//functions
 
 function populate(input) {
   displayValue += input;
@@ -71,13 +74,30 @@ function setValue(input) { //Set values, depending on which value is set
   displayValue = '';
 }
 
-inputButtons.forEach(button => {
+function clear() {
+  displayValue = '';
+  firstValueSet = false;
+  secondValueSet = false;
+  populate('');
+  operatorButtons.forEach(button => {
+    if(button.classList.contains('operator-buttons-clicked')) { //to remove the 'operator-buttons-clicked' class if other operator button is clicked
+      button.classList.toggle('operator-buttons-clicked');
+    };
+  });
+}
+
+
+//event listener 
+
+inputButtons.forEach(button => { //to show pressed numbers
   button.addEventListener('click', () => {
     populate(button.textContent)
   }); 
 });
 
-operatorButtons.forEach(button => {
+
+//operator button handling
+operatorButtons.forEach(button => { 
   button.addEventListener('click', () => {
     operatorButtons.forEach(button => {
       if(button.classList.contains('operator-buttons-clicked')) { //to remove the 'operator-buttons-clicked' class if other operator button is clicked
@@ -134,3 +154,6 @@ equalButton.addEventListener('click', () => {
 
   displayValue = '';
 });
+
+
+clearButton.addEventListener('click', () => clear());
