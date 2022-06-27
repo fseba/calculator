@@ -118,9 +118,7 @@ function setOperator(button) {
     firstValue = calculate(firstValue, operator, secondValue); 
     populate(firstValue);
     displayValue = '';
-  } 
-  
-  else {
+  } else {
     setValue(displayValue);
   };
   
@@ -129,28 +127,7 @@ function setOperator(button) {
 }
 
 
-//event listener 
-
-inputButtons.forEach(button => { //to show pressed numbers
-  button.addEventListener('click', () => {
-    populate(button.textContent)
-  }); 
-});
-
-
-//operator button handling
-operatorButtons.forEach(button => { 
-  button.addEventListener('click', () => {
-
-    toggleClickedClass();
-    setOperator(button);
-    
-    })
-  });
-
-
-equalButton.addEventListener('click', () => {
-  //create function operate() 
+function operate() {
   if(firstValue === undefined) return; //error handling if the equal key is pressed without values being set
 
   if(operator === '') { //makes it possible to press the equal key several times to repeat the calculation
@@ -166,12 +143,29 @@ equalButton.addEventListener('click', () => {
     populate('Error');
     firstValueSet = false; 
   } else {
-     populate(firstValue);
-  }
+    populate(firstValue);
+  };
 
   displayValue = '';
-  //end
+}
+
+//event listener 
+
+inputButtons.forEach(button => { //to show pressed numbers
+  button.addEventListener('click', () => populate(button.textContent)); 
 });
+
+
+//operator button handling
+operatorButtons.forEach(button => { 
+  button.addEventListener('click', () => {
+      toggleClickedClass();
+      setOperator(button);
+    })
+  });
+
+
+equalButton.addEventListener('click', () => operate());
 
 
 clearButton.addEventListener('click', () => clear());
