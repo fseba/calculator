@@ -92,6 +92,14 @@ function backspace() {
 }
 
 
+function toggleClickedClass() {
+  operatorButtons.forEach(button => {
+    if(button.classList.contains('operator-buttons-clicked')) { //to remove the 'operator-buttons-clicked' class if other operator button is clicked
+      button.classList.toggle('operator-buttons-clicked');
+    };
+  });
+}
+
 //event listener 
 
 inputButtons.forEach(button => { //to show pressed numbers
@@ -106,17 +114,20 @@ operatorButtons.forEach(button => {
   button.addEventListener('click', () => {
 
     //create function toggleClickedClass() 
-    operatorButtons.forEach(button => {
-      if(button.classList.contains('operator-buttons-clicked')) { //to remove the 'operator-buttons-clicked' class if other operator button is clicked
-        button.classList.toggle('operator-buttons-clicked');
-      };
-    });
+    toggleClickedClass();
+    //operatorButtons.forEach(button => {
+      // if(button.classList.contains('operator-buttons-clicked')) { //to remove the 'operator-buttons-clicked' class if other operator button is clicked
+      //   button.classList.toggle('operator-buttons-clicked');
+      // };
+    //});
     //end
 
     //create function setOperator(button) 
     if(button.textContent === '=') return; //to prevent the operator being set to '=', but remove 'operator-buttons-clicked' class when equal button is pressed
     
-    if(firstValueSet && operator === '') {
+    if(firstValueSet && operator === '' || (firstValueSet && operator !== '' && displayValue === '')) { 
+      //first case applies if another calculation is executed after pressing the equals button
+      //second case appears if the operator is changed without previous calculation 
       operator = lastOperator = button.textContent;
       button.classList.toggle('operator-buttons-clicked');
       displayValue = ''; 
