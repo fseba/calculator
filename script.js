@@ -15,13 +15,13 @@ function multiply(a, b) {
 function divide(a, b) {
   if(b === 0) {
     alert('Dividing by zero is forbidden, you mathematical wonder.');
-    // reset necessary 
+    clear();
     return; 
   }
   return a / b; 
 }
 
-function operate(a, operation, b) {
+function calculate(a, operation, b) {
   const aInt = parseInt(a); 
   const bInt = parseInt(b); 
   switch(operation) {
@@ -104,12 +104,16 @@ inputButtons.forEach(button => { //to show pressed numbers
 //operator button handling
 operatorButtons.forEach(button => { 
   button.addEventListener('click', () => {
+
+    //create function toggleClickedClass() 
     operatorButtons.forEach(button => {
       if(button.classList.contains('operator-buttons-clicked')) { //to remove the 'operator-buttons-clicked' class if other operator button is clicked
         button.classList.toggle('operator-buttons-clicked');
       };
     });
+    //end
 
+    //create function setOperator(button) 
     if(button.textContent === '=') return; //to prevent the operator being set to '=', but remove 'operator-buttons-clicked' class when equal button is pressed
     
     if(firstValueSet && operator === '') {
@@ -121,7 +125,7 @@ operatorButtons.forEach(button => {
 
     if(firstValueSet && operator !== '') { //to handle the case if an operator key is pressed to concatenate calculations
       setValue(displayValue);  
-      firstValue = operate(firstValue, operator, secondValue); 
+      firstValue = calculate(firstValue, operator, secondValue); 
       populate(firstValue);
       secondValueSet = false; 
       displayValue = '';
@@ -133,12 +137,14 @@ operatorButtons.forEach(button => {
     
     operator = lastOperator = button.textContent;
     button.classList.toggle('operator-buttons-clicked'); 
+    //end
     })
   });
 
 
 equalButton.addEventListener('click', () => {
-  if(firstValue === undefined) return; //error handling for if the equal key is pressed without values being set
+  //create function operate() 
+  if(firstValue === undefined) return; //error handling if the equal key is pressed without values being set
 
   if(operator === '') { //makes it possible to press the equal key several times to repeat the calculation
     operator = lastOperator; 
@@ -147,10 +153,10 @@ equalButton.addEventListener('click', () => {
     setValue(displayValue); 
   };
 
-  firstValue = operate(firstValue, operator, secondValue); 
+  firstValue = calculate(firstValue, operator, secondValue); 
   secondValueSet = false; 
 
-  if(isNaN(firstValue)) { //error handling for if the equal key is pressed without values being set
+  if(isNaN(firstValue)) { //error handling if the equal key is pressed without values being set
     populate('Error');
     firstValueSet = false; 
   } else {
@@ -158,6 +164,7 @@ equalButton.addEventListener('click', () => {
   }
 
   displayValue = '';
+  //end
 });
 
 
