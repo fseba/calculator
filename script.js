@@ -47,7 +47,7 @@ let lastOperator;
 let firstValue; 
 let secondValue;
 let firstValueSet = false; //to check if the value may be overwritten
-let secondValueSet = false; //to check if the value may be overwritten
+
 
 const inputField = document.querySelector('.input-field'); 
 const inputButtons = document.querySelectorAll('.input-buttons');
@@ -69,7 +69,6 @@ function setValue(input) { //Set values, depending on which value is set
     firstValueSet = true; 
   } else {
     secondValue = input;
-    secondValueSet = true; 
   };
   displayValue = '';
 }
@@ -77,8 +76,9 @@ function setValue(input) { //Set values, depending on which value is set
 function clear() {
   displayValue = '';
   firstValueSet = false;
-  secondValueSet = false;
+
   populate('');
+  
   operatorButtons.forEach(button => {
     if(button.classList.contains('operator-buttons-clicked')) { //to remove the 'operator-buttons-clicked' class if other operator button is clicked
       button.classList.toggle('operator-buttons-clicked');
@@ -100,6 +100,35 @@ function toggleClickedClass() {
   });
 }
 
+
+function setOperator(button) {
+  if(button.textContent === '=') return; //to prevent the operator being set to '=', but remove 'operator-buttons-clicked' class when equal button is pressed
+    
+  if(firstValueSet && (operator === '' ||  (operator !== '' && displayValue === ''))) { 
+    //first case applies if another calculation is executed after pressing the equal button
+    //second case appears if the operator is changed without previous calculation 
+    operator = lastOperator = button.textContent;
+    button.classList.toggle('operator-buttons-clicked');
+    displayValue = ''; 
+    return; 
+  }
+
+  if(firstValueSet && operator !== '') { //to handle the case if an operator key is pressed to concatenate calculations
+    setValue(displayValue);  
+    firstValue = calculate(firstValue, operator, secondValue); 
+    populate(firstValue);
+    displayValue = '';
+  } 
+  
+  else {
+    setValue(displayValue);
+  };
+  
+  operator = lastOperator = button.textContent;
+  button.classList.toggle('operator-buttons-clicked'); 
+}
+
+
 //event listener 
 
 inputButtons.forEach(button => { //to show pressed numbers
@@ -113,42 +142,9 @@ inputButtons.forEach(button => { //to show pressed numbers
 operatorButtons.forEach(button => { 
   button.addEventListener('click', () => {
 
-    //create function toggleClickedClass() 
     toggleClickedClass();
-    //operatorButtons.forEach(button => {
-      // if(button.classList.contains('operator-buttons-clicked')) { //to remove the 'operator-buttons-clicked' class if other operator button is clicked
-      //   button.classList.toggle('operator-buttons-clicked');
-      // };
-    //});
-    //end
-
-    //create function setOperator(button) 
-    if(button.textContent === '=') return; //to prevent the operator being set to '=', but remove 'operator-buttons-clicked' class when equal button is pressed
+    setOperator(button);
     
-    if(firstValueSet && operator === '' || (firstValueSet && operator !== '' && displayValue === '')) { 
-      //first case applies if another calculation is executed after pressing the equals button
-      //second case appears if the operator is changed without previous calculation 
-      operator = lastOperator = button.textContent;
-      button.classList.toggle('operator-buttons-clicked');
-      displayValue = ''; 
-      return; 
-    }
-
-    if(firstValueSet && operator !== '') { //to handle the case if an operator key is pressed to concatenate calculations
-      setValue(displayValue);  
-      firstValue = calculate(firstValue, operator, secondValue); 
-      populate(firstValue);
-      secondValueSet = false; 
-      displayValue = '';
-    } 
-    
-    else {
-      setValue(displayValue);
-    };
-    
-    operator = lastOperator = button.textContent;
-    button.classList.toggle('operator-buttons-clicked'); 
-    //end
     })
   });
 
@@ -165,7 +161,6 @@ equalButton.addEventListener('click', () => {
   };
 
   firstValue = calculate(firstValue, operator, secondValue); 
-  secondValueSet = false; 
 
   if(isNaN(firstValue)) { //error handling if the equal key is pressed without values being set
     populate('Error');
