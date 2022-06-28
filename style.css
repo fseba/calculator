@@ -46,11 +46,16 @@ button {
   width: auto;
 }
 
+button:focus-visible {
+  outline: none;
+}
+
 .grid-calculator-buttons button {
   background-color: rgb(130, 130, 130);
 }
 
-.grid-calculator-buttons button:active {
+.grid-calculator-buttons button:active,
+.grid-calculator-buttons button.active {
   background-color: rgb(191, 191, 191);
 }
 
@@ -65,8 +70,9 @@ button {
   background-color: orange;
 }
 
-.grid-operator-buttons button:active {
-  background-color: rgb(200, 130, 0);
+.grid-operator-buttons button:active, 
+.grid-operator-buttons button.active {
+background-color: rgb(200, 130, 0);
 }
 
 .operator-buttons-clicked {
@@ -82,7 +88,8 @@ button {
   grid-row: 1 / 2;
 }
 
-#clear:active, #backspace:active {
+#clear:active, #backspace:active,
+#clear.active, #backspace.active {
   background-color: rgb(130, 130, 130);
 }
 
