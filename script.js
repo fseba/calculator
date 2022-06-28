@@ -22,21 +22,22 @@ function divide(a, b) {
 }
 
 function calculate(a, operation, b) {
-  const aInt = parseInt(a); 
-  const bInt = parseInt(b); 
+  const aFloat = parseFloat(a); 
+  const bFloat = parseFloat(b); 
+
   switch(operation) {
     case '+': 
       operator = ''; 
-      return add(aInt, bInt);
+      return add(aFloat, bFloat);
     case '-': 
       operator = ''; 
-      return subtract(aInt, bInt);
+      return subtract(aFloat, bFloat);
     case 'x': 
       operator = ''; 
-      return multiply(aInt, bInt);
+      return multiply(aFloat, bFloat);
     case '/': 
       operator = ''; 
-      return divide(aInt, bInt);
+      return divide(aFloat, bFloat);
     } 
 }
 
@@ -59,6 +60,7 @@ const backspaceButton = document.getElementById('backspace');
 //functions
 
 function populate(input) {
+  if(key.textContent === '.' && displayValue.includes('.')) return; //prevents more than one '.' per value
   displayValue += input;
   inputField.textContent = displayValue;
 }
