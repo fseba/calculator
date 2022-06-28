@@ -24,21 +24,24 @@ function divide(a, b) {
 function calculate(a, operation, b) {
   const aFloat = parseFloat(a); 
   const bFloat = parseFloat(b); 
-
+  let solution;
+  
   switch(operation) {
     case '+': 
-      operator = ''; 
-      return add(aFloat, bFloat);
+      solution = add(aFloat, bFloat);
+      break;
     case '-': 
-      operator = ''; 
-      return subtract(aFloat, bFloat);
+      solution = subtract(aFloat, bFloat);
+      break;
     case 'x': 
-      operator = ''; 
-      return multiply(aFloat, bFloat);
+      solution = multiply(aFloat, bFloat);
+      break;
     case '/': 
-      operator = ''; 
-      return divide(aFloat, bFloat);
+      solution = divide(aFloat, bFloat);
+      break;
     } 
+  operator = '';
+  return Math.round((solution + Number.EPSILON) * 1000)/1000; 
 }
 
 
@@ -177,7 +180,7 @@ backspaceButton.addEventListener('click', backspace);
 
 //keyboard support 
 
-let key; 
+let key = 0; 
 window.addEventListener('keydown', useKeyboardInput);
 
 window.addEventListener('keydown', () => {
