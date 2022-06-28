@@ -41,7 +41,7 @@ function calculate(a, operation, b) {
       break;
     } 
   operator = '';
-  return Math.round((solution + Number.EPSILON) * 1000)/1000; 
+  return solution.toString().length > 11 ? (Math.round((solution + Number.EPSILON) * 100000000) / 100000000) : solution; 
 }
 
 
