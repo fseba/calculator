@@ -197,6 +197,8 @@ let key = 0;
 
 //event listener
 
+window.addEventListener('keydown', useKeyboardInput);
+
 //negateButton function call and 'active' class toggle
 window.addEventListener('keydown', (e) => {
   if(e.code === 'Slash' && e.altKey) {
