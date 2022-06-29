@@ -44,7 +44,7 @@ function calculate(a, operation, b) {
   return solution.toString().length > 11 ? (Math.round((solution + Number.EPSILON) * 100000000) / 100000000) : solution; 
 }
 
-//LOGIC FOR INPUT HANDLING AND CALCULATION
+//LOGIC FOR INPUT HANDLING AND OPERATION
 
 //variables 
 
@@ -80,6 +80,12 @@ function setValue(input) { //Set values, depending on which value is already set
     secondValue = input;
   };
   displayValue = '';
+}
+
+function negateInputValue() {
+  if(displayValue === '') return; 
+  !displayValue.includes('-') ? displayValue = `-${displayValue}` : displayValue = displayValue.slice(1);
+  inputField.textContent = displayValue;
 }
 
 function clear() {
@@ -155,12 +161,6 @@ function operate() {
   };
 
   displayValue = '';
-}
-
-function negateInputValue() {
-  if(displayValue === '') return; 
-  !displayValue.includes('-') ? displayValue = `-${displayValue}` : displayValue = displayValue.slice(1);
-  inputField.textContent = displayValue;
 }
 
 
