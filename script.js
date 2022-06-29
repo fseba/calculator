@@ -1,5 +1,5 @@
+//CALCULATIONS
 
-// basic operations 
 function add(a, b) {
   return a + b; 
 }
@@ -44,6 +44,9 @@ function calculate(a, operation, b) {
   return solution.toString().length > 11 ? (Math.round((solution + Number.EPSILON) * 100000000) / 100000000) : solution; 
 }
 
+//LOGIC FOR INPUT HANDLING AND CALCULATION
+
+//variables 
 
 let displayValue = '';
 let operator; 
@@ -59,6 +62,7 @@ const operatorButtons = document.querySelectorAll('.grid-operator-buttons button
 const equalButton = document.getElementById('equal'); 
 const clearButton = document.getElementById('clear'); 
 const backspaceButton = document.getElementById('backspace'); 
+const negateButton = document.getElementById('negate');
 
 //functions
 
@@ -153,6 +157,13 @@ function operate() {
   displayValue = '';
 }
 
+function negateInputValue() {
+  if(displayValue === '') return; 
+  !displayValue.includes('-') ? displayValue = `-${displayValue}` : displayValue = displayValue.slice(1);
+  inputField.textContent = displayValue;
+}
+
+
 //event listener 
 
 inputButtons.forEach(button => { //shows pressed numbers
@@ -160,7 +171,6 @@ inputButtons.forEach(button => { //shows pressed numbers
 });
 
 
-//operator button handling
 operatorButtons.forEach(button => { 
   button.addEventListener('click', () => {
       toggleClickedClass();
@@ -178,11 +188,31 @@ clearButton.addEventListener('click', clear);
 backspaceButton.addEventListener('click', backspace);
 
 
-//keyboard support 
+negateButton.addEventListener('click', negateInputValue);
+
+
+//KEYBOARD SUPPORT
 
 let key = 0; 
-window.addEventListener('keydown', useKeyboardInput);
 
+//event listener
+
+//negateButton function call and 'active' class toggle
+window.addEventListener('keydown', (e) => {
+  if(e.code === 'Slash' && e.altKey) {
+    negateInputValue();
+    negateButton.classList.add('active');
+  };
+});
+
+window.addEventListener('keyup', (e) => {
+  if(e.code === 'Slash' && e.altKey) {
+    negateButton.classList.remove('active');
+  };
+});
+
+
+//toggles 'active' class on pressed key
 window.addEventListener('keydown', () => {
   if(!key) return; 
   key.classList.add('active');
@@ -192,6 +222,9 @@ window.addEventListener('keyup', () => {
   if(!key) return; 
   key.classList.remove('active');
 });
+
+
+window.addEventListener('keydown', useKeyboardInput);
 
 function useKeyboardInput(e) {
   
