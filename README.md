@@ -4,10 +4,12 @@
 [Link to the lesson](https://www.theodinproject.com/lessons/foundations-calculator) 
 
 Hi there!
+
 Here is my solution for the final project of the foundations path of the odin project. 
 The design of the calculator is inspired by the macOS calculator.
 
-![screenshot calculator](screenshot_calculator.png)
+<img width="341" alt="screenshot_calculator" src="https://user-images.githubusercontent.com/94076238/176470121-515843ab-8017-4ff9-93a4-14e841c9510d.png">
+
 
 Brief explanation of the functionality:
 Input is buffered in variable 'displayValue' and set as 'firstValue' or 'secondValue' when an operator is pressed, then the selected operation is executed depending on the set values. 
@@ -35,6 +37,7 @@ Let me know if you find something to improve or bugs.
 
 Known bugs: 
 - If too many keys are pressed at the same time, the class 'active' is not removed correctly
-> Workarounds: 
-> - The 'active' class is removed if the button is pressed again
-> - The 'active' class is removed if the 'clear' button is pressed
+
+Workarounds: 
+- The 'active' class is removed if the button is pressed again
+- The 'active' class is removed if the 'clear' button is pressed
