@@ -6,10 +6,10 @@
 Hi there!
 
 Here is my solution for the final project of the foundations path of the odin project. 
+
 The design of the calculator is inspired by the macOS calculator.
 
-<img width="341" alt="screenshot_calculator" src="https://user-images.githubusercontent.com/94076238/176470121-515843ab-8017-4ff9-93a4-14e841c9510d.png">
-
+<img width="310" alt="Bildschirmfoto 2022-06-29 um 17 05 18" src="https://user-images.githubusercontent.com/94076238/176470815-15fd5910-8c3a-4c89-a62e-2e2e47261bc4.png">
 
 Brief explanation of the functionality:
 Input is buffered in variable 'displayValue' and set as 'firstValue' or 'secondValue' when an operator is pressed, then the selected operation is executed depending on the set values. 
