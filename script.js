@@ -14,7 +14,7 @@ function multiply(a, b) {
 
 function divide(a, b) {
   if(b === 0) {
-    alert('Dividing by zero is forbidden, you mathematical wonder.');
+    alert('Dividing by zero is forbidden.');
     clear();
     return; 
   }
@@ -118,17 +118,14 @@ function toggleClickedClass() { //removes the 'operator-buttons-clicked' class i
 function setOperator(button) {
   if(button.textContent === '=') return; //prevents the operator from being set to '=', but removes 'operator-buttons-clicked' class when equal button is pressed
   
-  if(firstValueSet && operator === '') { //enables a new calculation after the equal button was pressed
+  if(firstValueSet && operator === '' && !displayValue === '') { //enables a new calculation after the equal button was pressed
     firstValueSet = false;
     setValue(displayValue);
   };
   
-  if(firstValueSet && (operator === '' ||  (operator !== '' && displayValue === ''))) { 
-    //first case applies if another calculation is executed after pressing the equal button
-    //second case appears if the operator is changed without previous calculation 
+  if(firstValueSet && operator !== '' && displayValue === '') { //makes it possible to change the operator 
     operator = lastOperator = button.textContent;
     button.classList.toggle('operator-buttons-clicked');
-    displayValue = ''; 
     return; 
   };
 
