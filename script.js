@@ -118,7 +118,7 @@ function toggleClickedClass() { //removes the 'operator-buttons-clicked' class i
 function setOperator(button) {
   if(button.textContent === '=') return; //prevents the operator from being set to '=', but removes 'operator-buttons-clicked' class when equal button is pressed
   
-  if(firstValueSet && operator === '' && !(displayValue === '')) { //enables a new calculation after the equal button was pressed
+  if(firstValueSet && operator === '' && displayValue !== '') { //enables a new calculation after the equal button was pressed
     firstValueSet = false;
     setValue(displayValue);
   };
