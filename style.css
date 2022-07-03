@@ -9,10 +9,47 @@ body {
   flex-direction: column;
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+}
+
+header, footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(100, 100, 100);
+  color: white;
+  text-align: center;
+  height: 50px;
+  width: 100vw;
+}
+
+main {
+  flex-grow: 1;
+}
+
+svg {
+  fill: rgb(200, 200, 200);
+  margin-right: 5px;
+}
+
+a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: rgb(200, 200, 200);
+}
+
+a:hover > svg{
+  fill: white;
+}
+
+a:hover {
+  color: white;
 }
 
 .calculator-container {
-  margin-top: 25px;
+  margin-top: 50px;
   background-color: rgb(100, 100, 100);
   border: 1px solid black;
   border-radius: 8px;
