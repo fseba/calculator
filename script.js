@@ -90,7 +90,9 @@ function negateInputValue() {
 
 function clear() {
   displayValue = '';
+  firstValue = '';
   firstValueSet = false;
+  secondValue = ''; 
 
   populate('');
   toggleClickedClass();
