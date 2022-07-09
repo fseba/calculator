@@ -17,16 +17,13 @@
 
   --color-function-button: rgb(70, 70, 70);
   --color-function-button-active: rgb(130, 130, 130);
-  
-
-  --color-footer-link: rgb(200, 200, 200);
- 
 }
 
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--color-calculator-button-active);
   font-family: Arial, Helvetica, sans-serif;
   height: 100vh;
 }
@@ -47,7 +44,7 @@ main {
 }
 
 svg {
-  fill: var(--color-footer-link);
+  fill: var(--color-calculator-button-active);
   margin-right: 5px;
 }
 
@@ -56,7 +53,7 @@ a {
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  color: var(--color-footer-link);
+  color: var(--color-calculator-button-active);
 }
 
 a:hover > svg{
