@@ -30,14 +30,11 @@ What I learned from this project:
 
 The biggest challenge was to figure out how to handle the values and call the correct functions to the right time. 
 The breakthrough came with the idea of querying the status of the values via a variable (firstValueSet), followed by intensive use of the debugger. 
-firstValueSet = false -> firstValue can be set
-firstValueSet = true -> secondValue can be set and operations can be executed
+
+> firstValueSet = false -> firstValue can be set
+
+> firstValueSet = true -> secondValue can be set and operations can be executed
 
 Let me know if you find something to improve or bugs.
 
-Known bugs: 
-- If too many keys are pressed at the same time, the class 'active' is not removed correctly
-
-Workarounds: 
-- The 'active' class is removed if the button is pressed again
-- The 'active' class is removed if the 'clear' button is pressed
+Many thanks for reading and have a nice time 🙂
