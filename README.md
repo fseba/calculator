@@ -9,7 +9,7 @@ Here is my solution for the final project of the foundations path of the odin pr
 
 The design of the calculator is inspired by the macOS calculator.
 
-<img width="310" alt="Bildschirmfoto 2022-06-29 um 17 05 18" src="https://user-images.githubusercontent.com/94076238/176470815-15fd5910-8c3a-4c89-a62e-2e2e47261bc4.png">
+![calculator screenshot](https://user-images.githubusercontent.com/94076238/178106816-8714bed3-ed74-4fcf-aa5e-9b2046b54ef8.png)
 
 Brief explanation of the functionality:
 Input is buffered in variable 'displayValue' and set as 'firstValue' or 'secondValue' when an operator is pressed, then the selected operation is executed depending on the set values. 
