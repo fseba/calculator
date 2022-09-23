@@ -26,7 +26,7 @@ function calculate(a, operation, b) {
   const bFloat = parseFloat(b); 
   let solution;
   
-  switch(operation) {
+  switch (operation) {
     case '+': 
       solution = add(aFloat, bFloat);
       break;
@@ -67,7 +67,7 @@ const negateButton = document.getElementById('negate');
 //functions
 
 function populate(input) {
-  if(key.textContent === '.' && displayValue.includes('.')) return; //prevents more than one '.' per value
+  if (key.textContent === '.' && displayValue.includes('.')) return; //prevents more than one '.' per value
   displayValue += input;
   inputField.textContent = displayValue;
 }
@@ -83,7 +83,7 @@ function setValue(input) { //Set values, depending on which value is already set
 }
 
 function negateInputValue() {
-  if(displayValue === '') return; 
+  if (displayValue === '') return; 
   !displayValue.includes('-') ? displayValue = `-${displayValue}` : displayValue = displayValue.slice(1);
   inputField.textContent = displayValue;
 }
@@ -101,7 +101,7 @@ function clear() {
 }
 
 function backspace() {
-  if(displayValue === '') return; //prevents deletion of solutions
+  if (displayValue === '') return; //prevents deletion of solutions
 
   displayValue = inputField.textContent.slice(0,inputField.textContent.length-1)
   inputField.textContent = displayValue; 
@@ -110,7 +110,7 @@ function backspace() {
 
 function toggleClickedClass() { //removes the 'operator-buttons-clicked' class if other operator button is clicked
   operatorButtons.forEach(button => {
-    if(button.classList.contains('operator-buttons-clicked')) { 
+    if (button.classList.contains('operator-buttons-clicked')) { 
       button.classList.toggle('operator-buttons-clicked');
     };
   });
@@ -118,20 +118,20 @@ function toggleClickedClass() { //removes the 'operator-buttons-clicked' class i
 
 
 function setOperator(button) {
-  if(button.textContent === '=') return; //prevents the operator from being set to '=', but removes 'operator-buttons-clicked' class when equal button is pressed
+  if (button.textContent === '=') return; //prevents the operator from being set to '=', but removes 'operator-buttons-clicked' class when equal button is pressed
   
-  if(firstValueSet && operator === '' && displayValue !== '') { //enables a new calculation after the equal button was pressed
+  if (firstValueSet && operator === '' && displayValue !== '') { //enables a new calculation after the equal button was pressed
     firstValueSet = false;
     setValue(displayValue);
   };
   
-  if(firstValueSet && operator !== '' && displayValue === '') { //makes it possible to change the operator 
+  if (firstValueSet && operator !== '' && displayValue === '') { //makes it possible to change the operator 
     operator = lastOperator = button.textContent;
     button.classList.toggle('operator-buttons-clicked');
     return; 
   };
 
-  if(firstValueSet && operator !== '') { //handles the case if an operator key is pressed to concatenate calculations
+  if (firstValueSet && operator !== '') { //handles the case if an operator key is pressed to concatenate calculations
     setValue(displayValue);  
     firstValue = calculate(firstValue, operator, secondValue); 
     populate(firstValue);
@@ -146,9 +146,9 @@ function setOperator(button) {
 
 
 function operate() {
-  if(firstValue === undefined) return; //error handling if the equal key is pressed without values being set
+  if (firstValue === undefined) return; //error handling if the equal key is pressed without values being set
 
-  if(operator === '') { //makes it possible to press the equal key several times to repeat the calculation
+  if (operator === '') { //makes it possible to press the equal key several times to repeat the calculation
     operator = lastOperator; 
     displayValue = '';
   } else {
@@ -157,13 +157,13 @@ function operate() {
 
   firstValue = calculate(firstValue, operator, secondValue); 
 
-  if(isNaN(firstValue)) { //error handling if the equal key is pressed without values being set
+  if (isNaN(firstValue)) { //error handling if the equal key is pressed without values being set
     populate('Error');
     firstValueSet = false; 
   } else {
     populate(firstValue);
   };
-
+  
   displayValue = '';
 }
 
@@ -171,7 +171,7 @@ function operate() {
 //event listener 
 
 inputButtons.forEach(button => { //shows pressed numbers
-  button.addEventListener('click', () => populate(button.textContent)); 
+  button.addEventListener('click', () => populate(button.textContent) ); 
 });
 
 
@@ -205,14 +205,14 @@ window.addEventListener('keydown', useKeyboardInput);
 
 //negateButton function call and 'active' class toggle
 window.addEventListener('keydown', (e) => {
-  if(e.code === 'Slash' && e.altKey) {
+  if (e.code === 'Slash' && e.altKey) {
     negateInputValue();
     negateButton.classList.add('active');
   };
 });
 
 window.addEventListener('keyup', (e) => {
-  if(e.code === 'Slash' && e.altKey) {
+  if (e.code === 'Slash' && e.altKey) {
     negateButton.classList.remove('active');
   };
 });
@@ -220,12 +220,12 @@ window.addEventListener('keyup', (e) => {
 
 //toggles 'active' class on pressed key
 window.addEventListener('keydown', () => {
-  if(!key) return; 
+  if (!key) return; 
   key.classList.add('active');
 });
 
 window.addEventListener('keyup', () => {
-  if(!key) return; 
+  if (!key) return; 
   key.classList.remove('active');
 });
 
@@ -236,32 +236,32 @@ function useKeyboardInput(e) {
   
   key = document.querySelector(`button[data-key="${e.key}"]`)
 
-  switch(true) {
-    case(!key): 
+  switch (true) {
+    case (!key): 
       break; 
 
-    case(key.classList.contains('input-buttons')): 
+    case (key.classList.contains('input-buttons')): 
       populate(key.textContent);
       break;
 
-    case(key.id === 'add'): 
-    case(key.id === 'subtract'): 
-    case(key.id === 'multiply'): 
-    case(key.id === 'divide'): 
+    case (key.id === 'add'): 
+    case (key.id === 'subtract'): 
+    case (key.id === 'multiply'): 
+    case (key.id === 'divide'): 
       toggleClickedClass();
       setOperator(key);
       break;
 
-    case(key.id === 'equal'): 
+    case (key.id === 'equal'): 
       toggleClickedClass();
       operate();
       break;
 
-    case(key.id === 'clear'): 
+    case (key.id === 'clear'): 
       clear();
       break;
 
-    case(key.id === 'backspace'):
+    case (key.id === 'backspace'):
       backspace();
       break;
   }; 
